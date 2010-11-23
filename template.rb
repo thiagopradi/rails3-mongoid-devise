@@ -96,17 +96,18 @@ end
 gem 'rspec-rails'
 gem 'steak'
 gem 'capybara'
+gem "capistrano" 
+gem 'web-app-theme', '>= 0.6.2'
 
 run 'bundle install'
 puts "generators for rspec/steak"
 run 'rails g rspec:install'
 run 'rails g steak:install'
 
-
 #Capistrano
-gem "capistrano" 
 run 'capify .'
-
+# Web App theme
+run 'rails g web_app_theme:theme'
 #----------------------------------------------------------------------------
 # Set up Mongoid
 #----------------------------------------------------------------------------
