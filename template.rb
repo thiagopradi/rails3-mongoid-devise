@@ -34,6 +34,9 @@ else
   heroku_flag = false
 end
 
+
+
+
 #----------------------------------------------------------------------------
 # Set up git
 #----------------------------------------------------------------------------
@@ -88,6 +91,21 @@ end
 if jquery_flag
   gem 'jquery-rails', '0.2.5'
 end
+
+
+gem 'rspec-rails'
+gem 'steak'
+gem 'capybara'
+
+run 'bundle install'
+puts "generators for rspec/steak"
+run 'rails g rspec:install'
+run 'rails g steak:install'
+
+
+#Capistrano
+gem "capistrano" 
+run 'capify .'
 
 #----------------------------------------------------------------------------
 # Set up Mongoid
