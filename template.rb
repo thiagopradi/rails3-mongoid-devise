@@ -1,8 +1,8 @@
 # Application Generator Template
 # Modifies a Rails app to use Mongoid and Devise
-# Usage: rails new app_name -m https://github.com/fortuity/rails3-mongoid-devise/raw/master/template.rb
+# Usage: rails new app_name -m  https://github.com/tchandy/rails3-mongoid-devise/raw/master/template.rb
 
-# More info: http://github.com/fortuity/rails3-mongoid-devise/
+# More info: http://github.com/tchandy/rails3-mongoid-devise/
 
 # If you are customizing this template, you can use any methods provided by Thor::Actions
 # http://rdoc.info/rdoc/wycats/thor/blob/f939a3e8a854616784cac1dcff04ef4f3ee5f7ff/Thor/Actions.html
@@ -10,32 +10,18 @@
 # http://github.com/rails/rails/blob/master/railties/lib/rails/generators/actions.rb
 
 puts "Modifying a new Rails app to use Mongoid and Devise..."
-puts "Any problems? See http://github.com/fortuity/rails3-mongoid-devise/issues"
+puts "Any problems? See http://github.com/tchandy/rails3-mongoid-devise/issues"
 
 #----------------------------------------------------------------------------
 # Configure
 #----------------------------------------------------------------------------
-
-if yes?('Would you like to use the Haml template system? (yes/no)')
-  haml_flag = true
-else
-  haml_flag = false
-end
-
-if yes?('Would you like to use jQuery instead of Prototype? (yes/no)')
-  jquery_flag = true
-else
-  jquery_flag = false
-end
-
 if yes?('Do you want to install the Heroku gem so you can deploy to Heroku? (yes/no)')
   heroku_flag = true
 else
   heroku_flag = false
 end
 
-
-
+haml_flag = true
 
 #----------------------------------------------------------------------------
 # Set up git
@@ -75,24 +61,21 @@ end
 #----------------------------------------------------------------------------
 # Haml Option
 #----------------------------------------------------------------------------
-if haml_flag
-  puts "setting up Gemfile for Haml..."
-  append_file 'Gemfile', "\n# Bundle gems needed for Haml\n"
-  gem 'haml', '3.0.24'
-  gem 'haml-rails', '0.3.4', :group => :development
-  # the following gems are used to generate Devise views for Haml
-  gem 'hpricot', '0.8.3', :group => :development
-  gem 'ruby_parser', '2.0.5', :group => :development
-end
+puts "setting up Gemfile for Haml..."
+append_file 'Gemfile', "\n# Bundle gems needed for Haml\n"
+gem 'haml', '3.0.24'
+gem 'haml-rails', '0.3.4', :group => :development
+# the following gems are used to generate Devise views for Haml
+gem 'hpricot', '0.8.3', :group => :development
+gem 'ruby_parser', '2.0.5', :group => :development
 
 #----------------------------------------------------------------------------
 # jQuery Option
 #----------------------------------------------------------------------------
-if jquery_flag
-  gem 'jquery-rails', '0.2.5'
-end
+gem 'jquery-rails', '0.2.5'
 
 
+gem 'inherited_resources', '1.1.2'
 gem 'rspec-rails'
 gem 'steak'
 gem 'capybara'
@@ -107,7 +90,7 @@ run 'rails g steak:install'
 #Capistrano
 run 'capify .'
 # Web App theme
-run 'rails g web_app_theme:theme'
+run 'rails g web_app_theme:theme --engine=haml'
 #----------------------------------------------------------------------------
 # Set up Mongoid
 #----------------------------------------------------------------------------
@@ -165,12 +148,10 @@ gsub_file 'config/application.rb', /:password/, ':password, :password_confirmati
 #----------------------------------------------------------------------------
 # Set up jQuery
 #----------------------------------------------------------------------------
-if jquery_flag
-  run 'rm public/javascripts/rails.js'
-  puts "replacing Prototype with jQuery"
-  # "--ui" enables optional jQuery UI
-  run 'rails generate jquery:install --ui'
-end
+run 'rm public/javascripts/rails.js'
+puts "replacing Prototype with jQuery"
+# "--ui" enables optional jQuery UI
+run 'rails generate jquery:install --ui'
 
 #----------------------------------------------------------------------------
 # Set up Devise

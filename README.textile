@@ -1,0 +1,9 @@
+<h1>Application Template </h1>
+
+<p> Based on: <a href="https://github.com/fortuity/rails3-mongoid-devise"> https://github.com/fortuity/rails3-mongoid-devise </a>
+  
+<h2> Usage: </h2>
+<pre> rails new myapp -m https://github.com/tchandy/rails3-mongoid-devise/raw/master/template.rb </pre>
+
+<h2> Copyright </h2>
+<p> Copyright (c) 2010 Thiago Pradi, released under the MIT license. </p>
